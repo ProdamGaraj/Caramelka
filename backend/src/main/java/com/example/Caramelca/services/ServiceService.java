@@ -1,15 +1,13 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Calendar;
-import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.models.Employee_Service;
-import com.example.Caramelca.models.Service;
+import com.example.Caramelca.models.*;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.CalendarRepository;
 import com.example.Caramelca.repositories.Employee_ServiceRepository;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,4 +47,34 @@ public class ServiceService {
         return Pair.of(minDate, maxDate);
     }
 
+    public Iterable<Calendar> filteredCalendarsByDateAndEmployees(LocalDate date,
+                                                                  Employee employee,
+                                                                  Set<Employee> employees) {
+        if (employee != null && employees.contains(employee)) {
+            return calendarRepository.findByEmployeeIn(Set.of(employee));
+        }
+        if (date != null) {
+            return calendarRepository.findByDateAndEmployeeIn(date, employees);
+        }
+        return calendarRepository.findByEmployeeIn(employees);
+    }
+
+    public Appointment saveAppointment(Employee employee,
+                                Service service,
+                                User user,
+                                LocalDate date,
+                                LocalTime time) {
+        Appointment appointment = new Appointment(employee, service, user, date, time);
+        appointmetnRepository.save(appointment);
+        return appointment;
+    }
+
+    public void deleteCalendarByDateAndEmployee(Employee employee,
+                                                LocalDate date,
+                                                LocalTime time) {
+        Iterable<Calendar> calendars = calendarRepository.findByDateAndEmployeeAndTime(date, employee, time);
+        for (Calendar calendar : calendars) {
+            calendarRepository.delete(calendar);
+        }
+    }
 }
