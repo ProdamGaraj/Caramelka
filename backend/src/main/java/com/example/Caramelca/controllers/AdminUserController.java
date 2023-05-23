@@ -2,7 +2,7 @@ package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.Role;
 import com.example.Caramelca.models.User;
-import com.example.Caramelca.repositories.UserRepository;
+import com.example.Caramelca.services.AdminUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,38 +15,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminUserController {
 
-    private final UserRepository userRepository;
+    private final AdminUserService adminUserService;
 
-    public AdminUserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AdminUserController(AdminUserService adminUserService) {
+        this.adminUserService = adminUserService;
     }
 
     @GetMapping("/user")
     public String user(Model model) {
-        Iterable<User> users = userRepository.findByRoles(Role.USER);
-        Iterable<User> Allusers = userRepository.findByRoles(Role.USER);
+        Iterable<User> users = adminUserService.usersGetAll();
+        Iterable<User> Allusers = adminUserService.usersGetAll();
+
         model.addAttribute("users", users);
         model.addAttribute("Allusers", Allusers);
+
         return "user";
     }
 
     @GetMapping("/user/{id}")
     public String userOne(@PathVariable(value = "id") Long id,
                           Model model) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = adminUserService.userById(id);
+
         model.addAttribute("user", user);
+
         return "user-desc";
     }
 
     @GetMapping("/user/filter")
     public String userFilter(@RequestParam(required = false) User user,
                              Model model) {
-        Iterable<User> users = userRepository.findByRoles(Role.USER);
-        Iterable<User> Allusers = userRepository.findByRoles(Role.USER);
-
-        if (user != null) {
-            users = userRepository.findByNumber(user.getNumber());
-        }
+        Iterable<User> Allusers = adminUserService.usersGetAll();
+        Iterable<User> users = adminUserService.userFiltred(user);
 
         model.addAttribute("users", users);
         model.addAttribute("Allusers", Allusers);
@@ -57,9 +57,9 @@ public class AdminUserController {
     @PostMapping("/user/{id}/edit")
     public String userEdit(@PathVariable(value = "id") Long id,
                            @RequestParam String description) {
-        User user = userRepository.findById(id).orElseThrow();
-        user.setDescription(description);
-        userRepository.save(user);
+
+        adminUserService.userEdit(id, description);
+
         return "redirect:/user";
     }
 }
