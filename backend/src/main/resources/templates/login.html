@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/main.css}">
+<link rel="stylesheet" th:href="@{/css/l_r.css}">
+<head>
+  <title>Spring Security Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1 class="go">Вход</h1>
+<div th:if="${param.error}">
+  <h2>Неверный логин или пароль!</h2>
+</div>
+<div th:if="${param.logout}">
+  <h2>Вы вышли!</h2>
+</div>
+<div class="login">
+  <form th:action="@{/login}" method="post">
+    <div><label> Логин: <input type="text" name="username"/> </label></div>
+    <div><label> Пароль: <input type="password" name="password"/> </label></div>
+    <div><button type="submit" value="Sign In" class="button-16" role="button">Войти</button></div>
+  </form>
+</div>
+<div><a type="submit"  class="button-16" role="button" th:href="@{registration}">Зарегистрироваться</a></div>
+<div><a type="submit"  class="button-16" role="button" th:href="@{/index}">Продолжить</a></div>
+</body>
+</html>

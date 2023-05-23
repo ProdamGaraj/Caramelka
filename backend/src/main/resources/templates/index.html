@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Caramelca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+
+<div th:if="${user}">
+  <a th:href="@{/employees}">ADMIN</a>
+</div>
+
+<div class="wrapper">
+  <section class="hero">
+    <div class="cointainer">
+      <header class="header">
+        <nav class="menu1">
+          <ul class="menu_list">
+            <li class="menu__item">
+              <form th:action="@{/logout}">
+                <button type="submit" value="Sign Out" class="button-13" role="button">Выход</button>
+              </form>
+            </li>
+            <li class="menu__item"><a href="#uslugi-page" class="menu__link">Наши услуги</a></li>
+            <li class="menu__item"><a href="#masters-page" class="menu__link">Мастера</a></li>
+            <li class="menu__item"><a href="#contact" class="menu__link">Контакты</a></li>
+            <li class="menu__item"><a th:href="@{registration}" class="menu__link">Регистрация</a></li>
+            <li class="menu__item"><a th:href="@{login}" class="menu__link">Войти</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="hero__content">
+        <div class="hero__text-section">
+          <h4 class="hero_uptitle">САЛОН КРАСОТЫ "CARAMELCA"</h4>
+          <h1 class="hero__title">Создай свой неповторимый образ</h1>
+          <h3 class="hero_title1">CARAMELCA - это студия по созданию красоты. Наша студия для тех, кто любит себя</br>
+            и выбирает современные доступные способы ухода за собой. Мы ценим ваше время,</br>
+            поэтому мастера выполняют свою работу быстро и качественно.</h3>
+          <h4 class="hero_uptitle3">  .  </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="cointainer">
+      <h2 id="uslugi-page" class="section__titlen">Наши услуги</h2>
+      <h3 class="section__subtitlen">Мы поможем вам стать еще более привлекательными</h3>
+      <ul>
+        <li><a href="#nails"><p><img src="../img/мини-1.png" class="offers" alt=""/></a><h3 class="txt1">Маникюр:</br></h3><h4 class="txt3">Нет ничего прекраснее, </br>чем идеальный маникюр под кутикулу.</h4></p></li>
+      </ul>
+      <br><br>
+      <p><a href="#eye"><img src="../img/мини-2.png" class="offers1" alt=""/></a><h3 class="txt">Наращивание ресниц и коррекция бровей:</h3></br><h4 class="txt4">Если хочешь что-то поменять в своей жизни,</br> начни с ресниц и бровок!</h4></p>
+      <br><br>
+      <p><a href="#nail-f"><img src="../img/мини-3.png" class="offers2" alt=""/></a><h3 class="txt2">Педикюр:</h3></br><h4 class="txt5">Сделаем ваши ножки </br>красивыми и ухоженными.</h4></p>
+      <br><br>
+      <p><a href="#hair"><img src="../img/мини-4.png" class="offers3" alt=""/></a><h3 class="offers4">
+      Стрижка:
+    </h3></br><h4 class="txt6">За каждой эффектной девушкой</br> стоит профессиональный стилист.</h4></p>
+      <br><br>
+    </div>
+  </section>
+  <section class="masters">
+    <h2 id="masters-page" class="section__titlem">Наши мастера</h2>
+    <h3 class="section__subtitle">Самые талантливые люди работают каждый день, чтобы</h3>
+    <h3 class="section__subtitle0">предоставить лучший сервис и сделать наших клиентов</h3>
+    <h3 class="section__subtitle1">счастливыми</h3>
+    <div class="mr">
+      <div class="offers_masters">
+        <img src="../img/админ.png" class="master" alt="">
+        <img src="../img/мастер1.png" class="master" alt="">
+        <img src="../img/мастер2.png" class="master" alt="">
+        <img src="../img/мастер3.png" class="master" alt="">
+      </div>
+    </div>
+    <div class="mr2">
+      <div class="subtext">
+        <div class="big-text">
+          <p>Самойлова Юлия</p>
+        </div>
+        <div class="big-text">
+          <p>Мальцева Ева</p>
+        </div>
+        <div class="big-text">
+          <p>Ульянова Ксения</p>
+        </div>
+        <div class="big-text">
+          <p>Мусина Анастасия</p>
+        </div>
+      </div>
+      <div class="mini-subtext">
+        <div class="min-text">
+          <p>Администратор</p>
+        </div>
+        <div class="min-text1">
+          <p>Стилист-парикмахер</p>
+        </div>
+        <div class="min-text2">
+          <p>Мастер ногтевого сервиса</p>
+        </div>
+        <div class="min-text3">
+          <p>Lushmaker/бровист</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <img src="/img/1.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/2.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/3.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/4.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/5.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/6.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/7.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/9.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/10.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/11.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/13.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/14.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/15.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/16.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/17.png" style="width:50%">
+    </div>
+
+    <div class="mySlides fade">
+      <img src="/img/18.png" style="width:50%">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+  </div>
+  <br>
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(7)"></span>
+    <span class="dot" onclick="currentSlide(8)"></span>
+    <span class="dot" onclick="currentSlide(9)"></span>
+    <span class="dot" onclick="currentSlide(10)"></span>
+    <span class="dot" onclick="currentSlide(11)"></span>
+    <span class="dot" onclick="currentSlide(12)"></span>
+    <span class="dot" onclick="currentSlide(13)"></span>
+    <span class="dot" onclick="currentSlide(14)"></span>
+    <span class="dot" onclick="currentSlide(15)"></span>
+    <span class="dot" onclick="currentSlide(16)"></span>
+  </div>
+  <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+    }
+  </script>
+  <section class="ptice-m">
+    <h2 class="section_title">ПРАЙС-ЛИСТ</h2>
+    <h2 id="nails" class="section__title">МАНИКЮР</h2>
+    <h3 class="section__subtitlem">Маникюр на любой вкус</h3>
+    <div class="m">
+      <div class="manik">
+        <img src="../img/ногти1.png" class="manik" alt="">
+        <img src="../img/ногти3.png" class="manik" alt="">
+        <img src="../img/ногти4.png" class="manik" alt="">
+      </div>
+      <section class="manik-text">
+        <div class="offers_text_man">
+          <h3 class="offers_text_man1">
+            Мужской маникюр
+          </h3>
+          <h3 class="offers_text_man2">
+            Маникюр комбинированный/</br>
+            аппаратный/классический
+          </h3>
+          <h3 class="offers_text_man3">
+            Маникюр + покрытие (дизайн</br>
+            ногтей: стемпинг, рисунки, т.д)
+          </h3>
+        </div>
+        <div class="offers_text_man101">
+          <h4 class="offers_text_man11">
+            900 рублей
+          </h4>
+          <h4 class="offers_text_man21">
+            800 рублей
+          </h4>
+          <h4 class="offers_text_man31">
+            2300 рублей
+          </h4>
+        </div>
+        <div class="offers_text_man100">
+          <p class="offers_text_man10">Любой вид маникюра</p>
+          <p class="offers_text_man111">Аппаратный + щипчики/обрезной</p>
+          <p class="offers_text_man12">Снятие + маникюр + выравнивание + покрытие</p>
+        </div>
+      </section>
+      <a th:href="@{service/1}" class="btn">Записаться</a>
+      <a th:href="@{service/2}" class="btn1">Записаться</a>
+      <a th:href="@{service/3}" class="btn2">Записаться</a>
+    </div>
+    </section>
+  <section class="ptice-к">
+    <h2 id="eye" class="section__titlebr">НАРАЩИВАНИЕ РЕСНИЦ И КОРРЕКЦИЯ БРОВЕЙ</h2>
+    <h3 class="section__subtitlek">Сделай свои глазки более выразительными</h3>
+    <div class="r">
+        <div class="resnichi">
+          <img src="../img/глаза1.png" class="resnichi" alt="">
+          <img src="../img/глаза2.png" class="resnichi" alt="">
+          <img src="../img/глаза3.png" class="resnichi" alt="">
+        </div>
+        <section class="eye-text">
+          <div class="offers_text_eye">
+            <h3 class="offers_text_eye2">
+              Ламинирование бровей
+            </h3>
+            <h3 class="offers_text_eye3">
+              Наращивание ресниц
+            </h3>
+            <h3 class="offers_text_eye1">
+              Ламинирование бровей +</br>
+              ботокс
+            </h3>
+          </div>
+          <div class="offers_text_eye101">
+            <h4 class="offers_text_eye11">
+              3500 рублей
+            </h4>
+            <h4 class="offers_text_eye21">
+              2700 рублей
+            </h4>
+            <h4 class="offers_text_eye31">
+              2500 рублей
+            </h4>
+          </div>
+          <div class="offers_text_eye100">
+            <p class="offers_text_eye10">Долговременная укладка + восстановление</p>
+            <p class="offers_text_eye111">Наращивание ресниц любого объема</p>
+            <p class="offers_text_eye12">Окрашивание ресниц + ламинирование</p>
+          </div>
+      </section>
+      <a th:href="@{service/4}" class="btn">Записаться</a>
+      <a th:href="@{service/5}" class="btn11">Записаться</a>
+      <a th:href="@{service/6}" class="btn21">Записаться</a>
+    </div>
+  </section>
+  <section class="ptice-p">
+    <h2 id="nail-f"  class="section__title">ПЕДИКЮР</h2>
+    <h3 class="section__subtitlep">Ухоженные ножки это очень важно</h3>
+    <div class="n">
+      <div class="nogi">
+        <img src="../img/ноги1.png" class="resnichi" alt="">
+        <img src="../img/ноги2.png" class="resnichi" alt="">
+        <img src="../img/ноги3.png" class="resnichi" alt="">
+      </div>
+      <div class="offers_text_p">
+        <h3 class="offers_text_p2">
+          Педикюр аппаратный/</br>
+          комбинированный без</br>
+          покрытия
+        </h3>
+        <h3 class="offers_text_p3">
+          Педикюр аппаратный/</br>
+          комбинированный с</br>
+          покрытием
+        </h3>
+        <h3 class="offers_text_p1">
+          Педикюр мужской
+        </h3>
+      </div>
+      <div class="offers_text_p101">
+        <h4 class="offers_text_p11">
+          2100 рублей
+        </h4>
+        <h4 class="offers_text_p21">
+          2100 рублей
+        </h4>
+        <h4 class="offers_text_p31">
+          2700 рублей
+        </h4>
+      </div>
+      <div class="offers_text_p100">
+        <p class="offers_text_p10">Педикюр мужской</p>
+        <p class="offers_text_p111">Обработка стоп + обработка пальчиков</p>
+        <p class="offers_text_p12">Снятие + покртие + обработка стоп и пальчиков</p>
+      </div>
+    </div>
+    </section>
+  <div class="s1">
+    <a th:href="@{service/7}" class="btn">Записаться</a>
+    <a th:href="@{service/8}" class="btn1">Записаться</a>
+    <a th:href="@{service/9}" class="btn2">Записаться</a>
+  </div>
+  </section>
+  <section class="ptice-s">
+    <h2 id="hair" class="section__title">СТРИЖКА</h2>
+    <h3 class="section__subtitles">Сделай стрижку своей мечты</h3>
+    <div class="s">
+      <div class="strigka">
+        <img src="../img/волосы1.png" class="resnichi" alt="">
+        <img src="../img/волосы2.png" class="resnichi" alt="">
+        <img src="../img/волосы3.png" class="resnichi" alt="">
+      </div>
+      <div class="offers_text_s">
+        <h3 class="offers_text_s3">
+          Кератиновое выпрямление
+        </h3>
+        <h3 class="offers_text_s2">
+          Окрашивание
+        </h3>
+        <h3 class="offers_text_s1">
+          Стрижка
+        </h3>
+      </div>
+      <div class="offers_text_s101">
+        <h4 class="offers_text_s11">
+          1000 рублей
+        </h4>
+        <h4 class="offers_text_s21">
+          8000 рублей
+        </h4>
+        <h4 class="offers_text_s31">
+          3000 рублей
+        </h4>
+      </div>
+      <div class="offers_text_s100">
+        <p class="offers_text_s10">Любой вид стрижки</p>
+        <p class="offers_text_s111">Окрашивание + стрижка</p>
+        <p class="offers_text_s12">Кератин + ботокс волос</p>
+      </div>
+    </div>
+  </section>
+  <div class="s1">
+    <a th:href="@{service/10}" class="btn3">Записаться</a>
+    <a th:href="@{service/11}" class="btn31">Записаться</a>
+    <a th:href="@{service/12}" class="btn32">Записаться</a>
+  </div>
+</div>
+<down id="contact" class="wrapper_down">
+  <ul class="socials">
+    <li class="socials__item socials__item--icon--telega">
+      <a href="" class="socials__link"></a>
+    </li>
+    <li class="socials__item socials__item--icon--vk">
+      <a href="" class="socials__link"></a>
+    </li>
+    <li class="socials__item socials__item--icon--facebook">
+      <a href="" class="socials__link"></a>
+    </li>
+    <li class="socials__item socials__item--icon--insta">
+      <a href="" class="socials__link"></a>
+    </li>
+  </ul>
+  <a href="#">
+    <img src="../img/логолаванда.png" class="logo">
+  </a>
+</down>
+</body>
+</html>

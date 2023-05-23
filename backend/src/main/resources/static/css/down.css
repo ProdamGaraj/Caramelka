@@ -1,0 +1,67 @@
+.wrapper_down{
+    background: url('../img/b2.png') top;
+    background-color: rgb(255, 255, 255);
+}
+
+.logo{
+    width: 150px;
+    height: 150px;
+    margin-left: 100px;
+    margin-top: -100px;
+}
+
+.socials {
+    margin-left: 83%;
+    margin-top: 150px;
+}
+
+.socials__item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.socials__item:last-child {
+    margin-right: 0;
+}
+
+.socials__link {
+    display:block;
+    text-decoration: none;
+    width: 36px;
+    height: 36px;
+    background: center center no-repeat;
+}
+
+
+.socials__item--icon--telega .socials__link {
+    background-image: url("../img/t.png");
+}
+
+.socials__item--icon--telega .socials__link:hover {
+    background-image: url("../img/t1.png");
+}
+
+.socials__item--icon--vk .socials__link {
+    background-image: url("../img/vk.png");
+}
+
+.socials__item--icon--vk .socials__link:hover {
+    background-image: url("../img/vk1.png");
+}
+
+.socials__item--icon--facebook .socials__link {
+    background-image: url("../img/f2.png");
+}
+
+.socials__item--icon--facebook .socials__link:hover {
+    background-image: url("../img/facebook1.png");
+}
+
+.socials__item--icon--insta .socials__link {
+    background-image: url("../img/in.png");
+}
+
+.socials__item--icon--insta .socials__link:hover {
+    background-image: url("../img/in1.png");
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Пользователи</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/user.css}">
+</head>
+<body>
+<header class="header">
+  <nav class="menu1">
+    <ul class="menu_list1">
+      <li class="menu__item">
+        <form th:action="@{/logout}">
+          <button type="submit" value="Sign Out" class="button-13" role="button" style="color: black">Выход</button>
+        </form>
+      </li>
+      <li class="menu__item"><a th:href="@{/appointment}" class="menu__link1">Записи</a></li>
+      <li class="menu__item"><a th:href="@{/employees}" class="menu__link1">Сотрудники</a></li>
+      <li class="menu__item"><a th:href="@{/profession}" class="menu__link1">Профессии</a></li>
+      <li class="menu__item"><a th:href="@{/user}" class="menu__link1">Клиенты</a></li>
+      <li class="menu__item"><a th:href="@{/calendar}" class="menu__link1">Календарь</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="user">
+  <form th:action="@{/user/filter}" method="get">
+    <label for="user">Пользователь:</label>
+    <select id="user" name="user">
+      <option value="" selected>Выберите пользователя</option>
+      <option th:each="user : ${Allusers}" th:value="${user.id}" th:text="${user.name} + ' ' + ${user.surname}" />
+    </select>
+    <button type="submit" class="button-6" role="button">Поиск</button>
+  </form>
+</div>
+<div class="user">
+  <table>
+    <thead>
+    <tr>
+      <th>ФИО</th>
+      <th>Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+      <td th:text="${user.name} + ' ' + ${user.surname} + ' ' + ${user.patronymic}"></td>
+      <td th:text="${user.description}"></td>
+      <td>
+        <a th:href="'/user/' + ${user.id}" class="button-6" role="button">Редактировать</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Записи</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/appointment.css}">
+</head>
+<body>
+<header class="header">
+  <nav class="menu1">
+    <ul class="menu_list1">
+      <li class="menu__item">
+        <form th:action="@{/logout}">
+          <button type="submit" value="Sign Out" class="button-13" role="button" style="color: black">Выход</button>
+        </form>
+      </li>
+      <li class="menu__item"><a th:href="@{/appointment}" class="menu__link1">Записи</a></li>
+      <li class="menu__item"><a th:href="@{/employees}" class="menu__link1">Сотрудники</a></li>
+      <li class="menu__item"><a th:href="@{/profession}" class="menu__link1">Профессии</a></li>
+      <li class="menu__item"><a th:href="@{/user}" class="menu__link1">Клиенты</a></li>
+      <li class="menu__item"><a th:href="@{/calendar}" class="menu__link1">Календарь</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="appo">
+  <form th:action="@{/appointment/filter}" method="get">
+    <label for="date">Дата:</label>
+    <input type="date" id="date" name="date" th:min="${minDate}" th:max="${maxDate}" />
+
+    <label for="employer">Сотрудник:</label>
+    <select id="employer" name="employer">
+      <option value="" selected>Выберите сотрудника</option>
+      <option th:each="employer : ${employees}" th:value="${employer.id}" th:text="${employer.name} + ' ' + ${employer.surname}" />
+    </select>
+
+    <label for="service">Услуга:</label>
+    <select id="service" name="service">
+      <option value="" selected>Выберите услугу</option>
+      <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.title}"/>
+    </select>
+
+    <button type="submit">Поиск</button>
+  </form>
+</div>
+<div class="appo1">
+  <table>
+    <thead>
+      <tr>
+        <th>Услуга</th>
+        <th>Стоимость</th>
+        <th>Сотрудник</th>
+        <th>Клиент</th>
+        <th>Дата</th>
+        <th>Время</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.service.title}"></td>
+        <td th:text="${appointment.service.cost}"></td>
+        <td th:text="${appointment.employee.name} + ' ' + ${appointment.employee.surname}"></td>
+        <td th:text="${appointment.user.name} + ' ' + ${appointment.user.surname}"></td>
+        <td th:text="${appointment.date}"></td>
+        <td th:text="${appointment.time}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

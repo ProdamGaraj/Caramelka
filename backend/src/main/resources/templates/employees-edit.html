@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Редактирование сотрудника</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/edit.css}">
+</head>
+<body>
+  <h1 class="edit">Редактирование сотрудника</h1>
+  <div class="edit1">
+    <form th:action="@{/employees/{id}/edit(id=${id})}" method="post">
+      <input type="text" name="name" placeholder="Введите имя" th:value="${employee.name}" required>
+      <input type="text" name="surname" placeholder="Введите фамилию" th:value="${employee.surname}" required>
+      <input type="text" name="patronymic" placeholder="Введите отчество" th:value="${employee.patronymic}" required>
+      <input type="text" name="number" placeholder="Введите номер телефона" th:value="${employee.number}" required>
+      <button type="submit" class="button-6" role="button">Сохранить</button>
+    </form>
+    <form th:action="@{/employees/{id}/delete(id=${id})}" method="post">
+      <button type="submit" class="button-6" role="button">Удалить</button>
+    </form>
+  </div>
+</body>
+</html>

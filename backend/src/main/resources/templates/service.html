@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Услуга</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <link rel="stylesheet" th:href="@{/css/service.css}">
+</head>
+<body>
+<a th:href="@{/index}" class="button-6" role="button">Назад</a>
+<h1 class="pro">Выберите дату</h1>
+<div class="pro1">
+  <form th:action="@{/service/{id}/filter(id = ${id.id})}" method="get">
+    <label for="date">Дата:</label>
+    <input type="date" id="date" name="date" th:min="${minDate}" th:max="${maxDate}" />
+
+    <label for="employer">Сотрудник:</label>
+    <select id="employer" name="employer">
+      <option value="" selected>Выберите мастера</option>
+      <option th:each="employer : ${employees}" th:value="${employer.id}" th:text="${employer.name} + ' ' + ${employer.surname}" />
+    </select>
+
+    <button type="submit" class="button-6" role="button">Поиск</button>
+  </form>
+</div>
+<div class="pro3">
+  <table>
+    <thead>
+    <tr>
+      <th>Сотрудник</th>
+      <th>Дата</th>
+      <th>Время</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="calendar : ${calendars}">
+      <td th:text="${calendar.employee.name} + ' ' + ${calendar.employee.surname}"></td>
+      <td th:text="${calendar.date}"></td>
+      <td th:text="${calendar.time}"></td>
+      <td>
+        <form th:action="@{/service/{id}/appointment(id = ${id.id})}" method="post">
+          <input type="hidden" name="employer" th:value="${calendar.employee.id}" />
+          <input type="hidden" name="date" th:value="${calendar.date}" />
+          <input type="hidden" name="time" th:value="${calendar.time}" />
+          <button type="submit" class="button-6" role="button">Записаться</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

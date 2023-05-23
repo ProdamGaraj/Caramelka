@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Календарь</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/calendar.css}">
+</head>
+<body>
+<header class="header">
+    <nav class="menu1">
+        <ul class="menu_list1">
+            <li class="menu__item">
+                <form th:action="@{/logout}">
+                    <button type="submit" value="Sign Out" class="button-13" role="button" style="color: black">Выход</button>
+                </form>
+            </li>
+            <li class="menu__item"><a th:href="@{/appointment}" class="menu__link1">Записи</a></li>
+            <li class="menu__item"><a th:href="@{/employees}" class="menu__link1">Сотрудники</a></li>
+            <li class="menu__item"><a th:href="@{/profession}" class="menu__link1">Профессии</a></li>
+            <li class="menu__item"><a th:href="@{/user}" class="menu__link1">Клиенты</a></li>
+            <li class="menu__item"><a th:href="@{/calendar}" class="menu__link1">Календарь</a></li>
+        </ul>
+    </nav>
+</header>
+    <h1 class="time">Свободное время</h1>
+    <div class="time1">
+        <form th:action="@{/calendar/add}" method="post">
+            <label for="date">Дата:</label>
+            <input type="date" id="date" name="date" th:min="${minDate}" th:max="${maxDate}" required />
+
+            <label for="time">Время:</label>
+            <input type="time" id="time" name="time" required />
+
+            <label for="employee">Сотрудник:</label>
+            <select id="employee" name="employee" required>
+                <option value="" selected>Выберите сотрудника</option>
+                <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name} + ' ' + ${employee.surname}" />
+            </select>
+
+            <button type="submit" class="button-6" role="button">Добавить</button>
+        </form>
+    </div>
+    <div class="time2">
+        <form th:action="@{/calendar/filter}" method="get">
+            <label for="date">Дата:</label>
+            <input type="date" id="date" name="date" th:min="${minDate}" th:max="${maxDate}" />
+
+            <label for="employee">Сотрудник:</label>
+            <select id="employee" name="employee">
+                <option value="" selected>Выберите сотрудника</option>
+                <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name} + ' ' + ${employee.surname}" />
+            </select>
+
+            <button type="submit" class="button-6" role="button">Поиск</button>
+        </form>
+    </div>
+<div class="time3">
+    <table>
+        <thead>
+            <tr>
+                <th>Сотрудник</th>
+                <th>Дата</th>
+                <th>Время</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="calendar : ${calendar}">
+                <td th:text="${calendar.employee.name} + ' ' + ${calendar.employee.surname}"></td>
+                <td th:text="${calendar.date}"></td>
+                <td th:text="${calendar.time}"></td>
+                <td>
+                    <form th:action="@{/calendar/delete/{id}(id=${calendar.id})}" method="post">
+                        <button type="submit" class="button-6" role="button">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
