@@ -2,8 +2,8 @@ package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.Calendar;
 import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.repositories.CalendarRepository;
-import com.example.Caramelca.repositories.EmployeeRepository;
+import com.example.Caramelca.services.AdminCalendarService;
+import org.springframework.data.util.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,32 +20,23 @@ import java.time.LocalTime;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminCalendarController {
 
-    private final EmployeeRepository employeeRepository;
+    private final AdminCalendarService adminCalendarService;
 
-
-    private final CalendarRepository calendarRepository;
-
-    public AdminCalendarController(EmployeeRepository employeeRepository, CalendarRepository calendarRepository) {
-        this.employeeRepository = employeeRepository;
-        this.calendarRepository = calendarRepository;
+    public AdminCalendarController(AdminCalendarService adminCalendarService) {
+        this.adminCalendarService = adminCalendarService;
     }
 
     @GetMapping("/calendar")
     public String adminCalendar(Model model) {
-        Iterable<Calendar> calendars = calendarRepository.findAll();
-        Iterable<Employee> employees = employeeRepository.findAll();
-
-        for (Calendar calendar: calendars) {
-            LocalDate date = calendar.getDate();
-        }
+        Iterable<Calendar> calendars = adminCalendarService.calendarGetAll();
+        Iterable<Employee> employees = adminCalendarService.employeesGetAll();
 
         model.addAttribute("calendar", calendars);
         model.addAttribute("employees", employees);
 
-        LocalDate minDate = LocalDate.now().plusDays(1);
-        LocalDate maxDate = minDate.plusMonths(1);
-        model.addAttribute("minDate", minDate);
-        model.addAttribute("maxDate", maxDate);
+        Pair<LocalDate, LocalDate> dates = adminCalendarService.getMinMaxDates();
+        model.addAttribute("minDate", dates.getFirst());
+        model.addAttribute("maxDate", dates.getSecond());
 
         return "calendar";
     }
@@ -55,7 +46,7 @@ public class AdminCalendarController {
                               @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime time,
                               @RequestParam Employee employee) {
         Calendar calendar = new Calendar(employee, date, time);
-        calendarRepository.save(calendar);
+        adminCalendarService.calendarSave(calendar);
         return "redirect:/calendar";
     }
 
@@ -63,28 +54,22 @@ public class AdminCalendarController {
     public String calendarFilter(@RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                  @RequestParam(required = false) Employee employee,
                                  Model model) {
-        Iterable<Calendar> calendars = calendarRepository.findAll();
-        Iterable<Employee> employees = employeeRepository.findAll();
-        if(date != null) {
-            calendars = calendarRepository.findByDate(date);
-        }
-        if(employee != null) {
-            calendars = calendarRepository.findByEmployee(employee);
-        }
-        model.addAttribute("calendar", calendars);
+        Iterable<Employee> employees = adminCalendarService.employeesGetAll();
+        Iterable<Calendar> calendar = adminCalendarService.calendarFiltred(date, employee);
+
+        model.addAttribute("calendar", calendar);
         model.addAttribute("employees", employees);
 
-        LocalDate minDate = LocalDate.now().plusDays(1);
-        LocalDate maxDate = minDate.plusMonths(1);
-        model.addAttribute("minDate", minDate);
-        model.addAttribute("maxDate", maxDate);
+        Pair<LocalDate, LocalDate> dates = adminCalendarService.getMinMaxDates();
+        model.addAttribute("minDate", dates.getFirst());
+        model.addAttribute("maxDate", dates.getSecond());
 
         return "calendar";
     }
 
     @PostMapping("/calendar/delete/{id}")
     public String calendarDelete(@PathVariable(value = "id") Long id) {
-        calendarRepository.deleteById(id);
+        adminCalendarService.calendarDelete(id);
         return "redirect:/calendar";
     }
 }
