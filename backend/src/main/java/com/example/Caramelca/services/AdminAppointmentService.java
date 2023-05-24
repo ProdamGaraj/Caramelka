@@ -2,6 +2,7 @@ package com.example.Caramelca.services;
 
 import com.example.Caramelca.models.Appointment;
 import com.example.Caramelca.models.Employee;
+import com.example.Caramelca.models.Procedure;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.EmployeeRepository;
 import com.example.Caramelca.repositories.ServiceRepository;
@@ -29,8 +30,8 @@ public class AdminAppointmentService {
         return employees;
     }
 
-    public Iterable<com.example.Caramelca.models.Service> servicesGetAll () {
-        Iterable<com.example.Caramelca.models.Service> services = serviceRepository.findAll();
+    public Iterable<Procedure> servicesGetAll () {
+        Iterable<Procedure> services = serviceRepository.findAll();
         return  services;
     }
 
@@ -44,7 +45,7 @@ public class AdminAppointmentService {
         return appointments;
     }
 
-    public Iterable<Appointment> appointmentsFindByService(com.example.Caramelca.models.Service service) {
+    public Iterable<Appointment> appointmentsFindByService(Procedure service) {
         Iterable<Appointment> appointments = appointmetnRepository.findByService(service);
         return appointments;
     }
@@ -54,7 +55,7 @@ public class AdminAppointmentService {
         return appointments;
     }
 
-    public Iterable<Appointment> appointmentsFiltred(com.example.Caramelca.models.Service service,
+    public Iterable<Appointment> appointmentsFiltred(Procedure service,
                                                      Employee employer,
                                                      LocalDate date) {
         Iterable<Appointment> appointments = appointmentsGetAll();

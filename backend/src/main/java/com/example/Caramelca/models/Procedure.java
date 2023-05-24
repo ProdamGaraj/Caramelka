@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Service {
+public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +22,7 @@ public class Service {
 
     private int duration;
 
-    public Service(String title, String description, String logo, int cost, int duration) {
+    public Procedure(String title, String description, String logo, int cost, int duration) {
         this.title = title;
         this.description = description;
         this.logo = logo;
@@ -30,7 +30,7 @@ public class Service {
         this.duration = duration;
     }
 
-    public Service() {
+    public Procedure() {
 
     }
 

@@ -1,7 +1,7 @@
 package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.*;
-import com.example.Caramelca.services.ServiceService;
+import com.example.Caramelca.services.ProcedureService;
 import org.springframework.data.util.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,21 +17,21 @@ import java.time.LocalTime;
 import java.util.Set;
 
 @Controller
-public class ServiceController {
+public class ProcedureController {
 
-    private final ServiceService serviceService;
+    private final ProcedureService procedureService;
 
 
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
+    public ProcedureController(ProcedureService procedureService) {
+        this.procedureService = procedureService;
     }
 
     @GetMapping("/service/{id}")
-    public String service(@PathVariable(value = "id") Service service,
+    public String service(@PathVariable(value = "id") Procedure service,
                           Model model) {
-        Set<Employee> employees = serviceService.employeeByService(service);
-        Iterable<Calendar> calendars = serviceService.calendarsByEmployees(employees);
-        Pair<LocalDate, LocalDate> dates = serviceService.getMinMaxDates();
+        Set<Employee> employees = procedureService.employeeByService(service);
+        Iterable<Calendar> calendars = procedureService.calendarsByEmployees(employees);
+        Pair<LocalDate, LocalDate> dates = procedureService.getMinMaxDates();
 
         model.addAttribute("calendars", calendars);
         model.addAttribute("employees", employees);
@@ -43,14 +43,14 @@ public class ServiceController {
     }
 
     @GetMapping("/service/{id}/filter")
-    public String serviceFilter(@PathVariable(value = "id") Service service,
+    public String serviceFilter(@PathVariable(value = "id") Procedure service,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                 @RequestParam(required = false) Employee employer,
                                 Model model) {
 
-        Set<Employee> employees = serviceService.employeeByService(service);
-        Iterable<Calendar> calendars = serviceService.filteredCalendarsByDateAndEmployees(date, employer, employees);
-        Pair<LocalDate, LocalDate> dates = serviceService.getMinMaxDates();
+        Set<Employee> employees = procedureService.employeeByService(service);
+        Iterable<Calendar> calendars = procedureService.filteredCalendarsByDateAndEmployees(date, employer, employees);
+        Pair<LocalDate, LocalDate> dates = procedureService.getMinMaxDates();
 
         model.addAttribute("employees", employees);
         model.addAttribute("calendars", calendars);
@@ -62,18 +62,18 @@ public class ServiceController {
     }
 
     @PostMapping("/service/{id}/appointment")
-    public String appointment(@PathVariable(value = "id") Service service,
+    public String appointment(@PathVariable(value = "id") Procedure service,
                               @RequestParam String date,
                               @RequestParam String time,
                               @RequestParam Employee employer,
                               @AuthenticationPrincipal User user) {
 
-        Appointment appointment = serviceService.saveAppointment(
+        Appointment appointment = procedureService.saveAppointment(
                 employer, service, user,
                 LocalDate.parse(date),
                 LocalTime.parse(time));
 
-        serviceService.deleteCalendarByDateAndEmployee(employer,
+        procedureService.deleteCalendarByDateAndEmployee(employer,
                 appointment.getDate(),
                 appointment.getTime());
 

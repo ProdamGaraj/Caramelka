@@ -3,7 +3,7 @@ package com.example.Caramelca.models;
 import jakarta.persistence.*;
 
 @Entity
-public class Employee_Service {
+public class Profession {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -14,17 +14,17 @@ public class Employee_Service {
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    private Service service;
+    private Procedure service;
 
     private int experience;
 
-    public Employee_Service(Employee employee, Service service) {
+    public Profession(Employee employee, Procedure service) {
         this.employee = employee;
         this.service = service;
     }
 
 
-    public Employee_Service() {
+    public Profession() {
 
     }
 
@@ -44,11 +44,11 @@ public class Employee_Service {
         this.employee = employee;
     }
 
-    public Service getService() {
+    public Procedure getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(Procedure service) {
         this.service = service;
     }
 

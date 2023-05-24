@@ -3,7 +3,7 @@ package com.example.Caramelca.services;
 import com.example.Caramelca.models.*;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.CalendarRepository;
-import com.example.Caramelca.repositories.Employee_ServiceRepository;
+import com.example.Caramelca.repositories.ProfessionRepository;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
@@ -12,25 +12,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 @org.springframework.stereotype.Service
-public class ServiceService {
+public class ProcedureService {
     private final CalendarRepository calendarRepository;
 
-    private final Employee_ServiceRepository employeeServiceRepository;
+    private final ProfessionRepository employeeServiceRepository;
 
     private final AppointmetnRepository appointmetnRepository;
 
-    public ServiceService(CalendarRepository calendarRepository, Employee_ServiceRepository employeeServiceRepository, AppointmetnRepository appointmetnRepository) {
+    public ProcedureService(CalendarRepository calendarRepository, ProfessionRepository employeeServiceRepository, AppointmetnRepository appointmetnRepository) {
         this.calendarRepository = calendarRepository;
         this.employeeServiceRepository = employeeServiceRepository;
         this.appointmetnRepository = appointmetnRepository;
     }
 
-    public Set<Employee> employeeByService(Service service) {
-        Iterable<Employee_Service> employee = employeeServiceRepository.findByService(service);
+    public Set<Employee> employeeByService(Procedure service) {
+        Iterable<Profession> employee = employeeServiceRepository.findByService(service);
 
         Set<Employee> employees = new HashSet<>();
 
-        for (Employee_Service employeeService : employee) {
+        for (Profession employeeService : employee) {
             employees.add(employeeService.getEmployee());
         }
 
@@ -60,7 +60,7 @@ public class ServiceService {
     }
 
     public Appointment saveAppointment(Employee employee,
-                                Service service,
+                                Procedure service,
                                 User user,
                                 LocalDate date,
                                 LocalTime time) {

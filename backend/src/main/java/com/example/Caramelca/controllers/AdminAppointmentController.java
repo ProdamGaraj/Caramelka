@@ -2,7 +2,7 @@ package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.Appointment;
 import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.models.Service;
+import com.example.Caramelca.models.Procedure;
 import com.example.Caramelca.services.AdminAppointmentService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +27,7 @@ public class AdminAppointmentController {
     public String appointment(Model model) {
         Iterable<Appointment> appointments = adminAppointmentService.appointmentsGetAll();
         Iterable<Employee> employees = adminAppointmentService.employeesGetAll();
-        Iterable<Service> services = adminAppointmentService.servicesGetAll();
+        Iterable<Procedure> services = adminAppointmentService.servicesGetAll();
 
         model.addAttribute("services", services);
         model.addAttribute("employees", employees);
@@ -43,12 +43,12 @@ public class AdminAppointmentController {
     }
 
     @GetMapping("/appointment/filter")
-    public String appointmentFilter(@RequestParam(required = false) Service service,
+    public String appointmentFilter(@RequestParam(required = false) Procedure service,
                                     @RequestParam(required = false) Employee employer,
                                     @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                     Model model) {
         Iterable<Employee> employees = adminAppointmentService.employeesGetAll();
-        Iterable<Service> services = adminAppointmentService.servicesGetAll();
+        Iterable<Procedure> services = adminAppointmentService.servicesGetAll();
         Iterable<Appointment> appointments = adminAppointmentService.appointmentsFiltred(service, employer, date);
 
         model.addAttribute("services", services);

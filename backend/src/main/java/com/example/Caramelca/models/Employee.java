@@ -13,7 +13,7 @@ public class Employee {
     private Long id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Set<Employee_Service> employee_Service = new LinkedHashSet<Employee_Service>();
+    private Set<Profession> profession = new LinkedHashSet<Profession>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private Set<Calendar> calendar = new LinkedHashSet<Calendar>();
