@@ -19,7 +19,7 @@
 <a th:href="@{/index}" class="button-6" role="button">Назад</a>
 <h1 class="pro">Выберите дату</h1>
 <div class="pro1">
-  <form th:action="@{/service/{id}/filter(id = ${id.id})}" method="get">
+  <form th:action="@{/procedure/{id}/filter(id = ${id.id})}" method="get">
     <label for="date">Дата:</label>
     <input type="date" id="date" name="date" th:min="${minDate}" th:max="${maxDate}" />
 

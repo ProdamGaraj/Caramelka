@@ -1,4 +1,4 @@
-package com.example.Caramelca.services;
+package com.example.Caramelca.services.Admin;
 
 import com.example.Caramelca.models.Appointment;
 import com.example.Caramelca.models.Employee;

@@ -1,8 +1,8 @@
-package com.example.Caramelca.controllers;
+package com.example.Caramelca.controllers.Admin;
 
 import com.example.Caramelca.models.Calendar;
 import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.services.AdminCalendarService;
+import com.example.Caramelca.services.Admin.AdminCalendarService;
 import org.springframework.data.util.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
