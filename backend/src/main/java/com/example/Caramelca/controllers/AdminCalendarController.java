@@ -8,15 +8,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Controller
+@RequestMapping("/calendar")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminCalendarController {
 
@@ -26,7 +24,7 @@ public class AdminCalendarController {
         this.adminCalendarService = adminCalendarService;
     }
 
-    @GetMapping("/calendar")
+    @GetMapping("/")
     public String adminCalendar(Model model) {
         Iterable<Calendar> calendars = adminCalendarService.calendarGetAll();
         Iterable<Employee> employees = adminCalendarService.employeesGetAll();
@@ -41,7 +39,7 @@ public class AdminCalendarController {
         return "calendar";
     }
 
-    @PostMapping("/calendar/add")
+    @PostMapping("/add")
     public String calendarAdd(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                               @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime time,
                               @RequestParam Employee employee) {
@@ -50,7 +48,7 @@ public class AdminCalendarController {
         return "redirect:/calendar";
     }
 
-    @GetMapping("/calendar/filter")
+    @GetMapping("/filter")
     public String calendarFilter(@RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                  @RequestParam(required = false) Employee employee,
                                  Model model) {
@@ -67,7 +65,7 @@ public class AdminCalendarController {
         return "calendar";
     }
 
-    @PostMapping("/calendar/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String calendarDelete(@PathVariable(value = "id") Long id) {
         adminCalendarService.calendarDelete(id);
         return "redirect:/calendar";

@@ -9,11 +9,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 
 @Controller
+@RequestMapping("/appointment")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminAppointmentController {
 
@@ -23,7 +25,7 @@ public class AdminAppointmentController {
         this.adminAppointmentService = adminAppointmentService;
     }
 
-    @GetMapping("/appointment")
+    @GetMapping("/")
     public String appointment(Model model) {
         Iterable<Appointment> appointments = adminAppointmentService.appointmentsGetAll();
         Iterable<Employee> employees = adminAppointmentService.employeesGetAll();
@@ -42,7 +44,7 @@ public class AdminAppointmentController {
         return "appointment";
     }
 
-    @GetMapping("/appointment/filter")
+    @GetMapping("/filter")
     public String appointmentFilter(@RequestParam(required = false) Procedure service,
                                     @RequestParam(required = false) Employee employer,
                                     @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
