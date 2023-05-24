@@ -14,7 +14,7 @@ import java.time.LocalTime;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/procedure")
+//TODO @RequestMapping("/procedure")
 public class ProcedureController {
 
     private final ProcedureService procedureService;
@@ -24,7 +24,7 @@ public class ProcedureController {
         this.procedureService = procedureService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/procedure/{id}")
     public String service(@PathVariable(value = "id") Procedure service,
                           Model model) {
         Set<Employee> employees = procedureService.employeeByService(service);
@@ -40,7 +40,7 @@ public class ProcedureController {
         return "procedure";
     }
 
-    @GetMapping("/{id}/filter")
+    @GetMapping("/procedure/{id}/filter")
     public String serviceFilter(@PathVariable(value = "id") Procedure service,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                 @RequestParam(required = false) Employee employer,
@@ -59,7 +59,7 @@ public class ProcedureController {
         return "procedure";
     }
 
-    @PostMapping("/{id}/appointment")
+    @PostMapping("/procedure/{id}/appointment")
     public String appointment(@PathVariable(value = "id") Procedure service,
                               @RequestParam String date,
                               @RequestParam String time,

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/employees")
+//TODO @RequestMapping("/employees")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class EmployeeController {
 
@@ -20,14 +20,14 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/employees")
     public String employeeMain(Model model) {
         Iterable<Employee> employees = employeeService.findAllEmployee();
         model.addAttribute("employees", employees);
         return "employees";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/employees/add")
     public String employeeAdd(@RequestParam String name,
                               @RequestParam String surname,
                               @RequestParam String patronymic,
@@ -37,7 +37,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/employees/{id}/edit")
     public String employeesEdit(@RequestParam(required = false) String name,
                                  @RequestParam(required = false) String surname,
                                  @RequestParam(required = false) String number,
@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
 
-    @GetMapping("/filter")
+    @GetMapping("/employees/filter")
     public String employeeFilter(@RequestParam(required = false) String name,
                                  @RequestParam(required = false) String surname,
                                  @RequestParam(required = false) String number,
@@ -58,14 +58,14 @@ public class EmployeeController {
         return "employees";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/employees/{id}")
     public String employee(@PathVariable(value = "id") Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
         return "employees-edit";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("/employees/{id}/edit")
     public String employeeEdit(@PathVariable(value = "id") Long id,
                                @RequestParam String name,
                                @RequestParam String surname,
@@ -80,7 +80,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @PostMapping("/{id}/delete")
+    @PostMapping("/employees/{id}/delete")
     public String employeeDelete(@PathVariable(value = "id") Long id) {
         employeeService.employeeDelete(id);
         return "redirect:/employees";

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Controller
-@RequestMapping("/calendar")
+//TODO @RequestMapping("/calendar")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminCalendarController {
 
@@ -24,7 +24,7 @@ public class AdminCalendarController {
         this.adminCalendarService = adminCalendarService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/calendar")
     public String adminCalendar(Model model) {
         Iterable<Calendar> calendars = adminCalendarService.calendarGetAll();
         Iterable<Employee> employees = adminCalendarService.employeesGetAll();
@@ -39,7 +39,7 @@ public class AdminCalendarController {
         return "calendar";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/calendar/add")
     public String calendarAdd(@RequestParam @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                               @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime time,
                               @RequestParam Employee employee) {
@@ -48,7 +48,7 @@ public class AdminCalendarController {
         return "redirect:/calendar";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/calendar/filter")
     public String calendarFilter(@RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                  @RequestParam(required = false) Employee employee,
                                  Model model) {
@@ -65,7 +65,7 @@ public class AdminCalendarController {
         return "calendar";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/calendar/delete/{id}")
     public String calendarDelete(@PathVariable(value = "id") Long id) {
         adminCalendarService.calendarDelete(id);
         return "redirect:/calendar";

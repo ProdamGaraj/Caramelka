@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("registration")
+// TODO: ебануть такое @RequestMapping("/registration")
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -18,12 +18,12 @@ public class RegistrationController {
         this.registrationService = registrationService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/registration")
     public String registration() {
         return "registration";
     }
 
-    @PostMapping("/")
+    @PostMapping("/registration")
     public String addUser(User user,
                           Model model) {
         if (registrationService.checkUserByUsernameInDB(user.getUsername())) {
