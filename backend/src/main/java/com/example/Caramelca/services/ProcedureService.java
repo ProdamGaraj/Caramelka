@@ -3,7 +3,6 @@ package com.example.Caramelca.services;
 import com.example.Caramelca.models.*;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.CalendarRepository;
-import com.example.Caramelca.repositories.ProfessionRepository;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
@@ -15,26 +14,15 @@ import java.util.Set;
 public class ProcedureService {
     private final CalendarRepository calendarRepository;
 
-    private final ProfessionRepository employeeServiceRepository;
-
     private final AppointmetnRepository appointmetnRepository;
 
-    public ProcedureService(CalendarRepository calendarRepository, ProfessionRepository employeeServiceRepository, AppointmetnRepository appointmetnRepository) {
+    public ProcedureService(CalendarRepository calendarRepository, AppointmetnRepository appointmetnRepository) {
         this.calendarRepository = calendarRepository;
-        this.employeeServiceRepository = employeeServiceRepository;
         this.appointmetnRepository = appointmetnRepository;
     }
 
     public Set<Employee> employeeByService(Procedure service) {
-        Iterable<Profession> employee = employeeServiceRepository.findByService(service);
-
-        Set<Employee> employees = new HashSet<>();
-
-        for (Profession employeeService : employee) {
-            employees.add(employeeService.getEmployee());
-        }
-
-        return employees;
+        return new HashSet<>(service.getEmployees());
     }
 
     public Iterable<Calendar> calendarsByEmployees(Set<Employee> employees) {

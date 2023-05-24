@@ -2,6 +2,7 @@ package com.example.Caramelca.models;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -13,13 +14,13 @@ public class Employee {
     private Long id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Set<Profession> profession = new LinkedHashSet<Profession>();
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private Set<Calendar> calendar = new LinkedHashSet<Calendar>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private Set<Appointment> appointment = new LinkedHashSet<Appointment>();
+
+    @ManyToMany(mappedBy = "employees")
+    private Collection<Procedure> procedures;
 
     private String name;
 
@@ -40,6 +41,14 @@ public class Employee {
         this.surname = surname;
         this.patronymic = patronymic;
         this.number = number;
+    }
+
+    public void setProcedures(Collection<Procedure> procedures) {
+        this.procedures = procedures;
+    }
+
+    public Collection<Procedure> getProcedures() {
+        return procedures;
     }
 
     public Long getId() {

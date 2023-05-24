@@ -1,9 +1,8 @@
 package com.example.Caramelca.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Collection;
 
 @Entity
 public class Procedure {
@@ -22,6 +21,9 @@ public class Procedure {
 
     private int duration;
 
+    @ManyToMany
+    private Collection<Employee> employees;
+
     public Procedure(String title, String description, String logo, int cost, int duration) {
         this.title = title;
         this.description = description;
@@ -32,6 +34,14 @@ public class Procedure {
 
     public Procedure() {
 
+    }
+
+    public Collection<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Collection<Employee> employees) {
+        this.employees = employees;
     }
 
     public Long getId() {
