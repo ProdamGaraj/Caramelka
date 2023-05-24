@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/appointment")
+//TODO @RequestMapping("/appointment")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminAppointmentController {
 
@@ -25,7 +25,7 @@ public class AdminAppointmentController {
         this.adminAppointmentService = adminAppointmentService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/appointment")
     public String appointment(Model model) {
         Iterable<Appointment> appointments = adminAppointmentService.appointmentsGetAll();
         Iterable<Employee> employees = adminAppointmentService.employeesGetAll();
@@ -44,7 +44,7 @@ public class AdminAppointmentController {
         return "appointment";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/appointment/filter")
     public String appointmentFilter(@RequestParam(required = false) Procedure service,
                                     @RequestParam(required = false) Employee employer,
                                     @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,

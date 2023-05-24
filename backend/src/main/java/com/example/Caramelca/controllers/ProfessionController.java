@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/profession")
+//TODO @RequestMapping("/profession")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class ProfessionController {
 
@@ -28,7 +28,7 @@ public class ProfessionController {
         this.serviceRepository = serviceRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/profession")
     public String profession(Model model) {
         Iterable<Profession> professions = professionRepository.findAll();
         Iterable<Employee> employees = employeeRepository.findAll();
@@ -41,7 +41,7 @@ public class ProfessionController {
         return "profession";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/profession/add")
     public String professionAdd(@RequestParam Employee employee,
                                 @RequestParam Procedure service) {
         Profession profession = new Profession(employee, service);
@@ -49,7 +49,7 @@ public class ProfessionController {
         return "redirect:/profession";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/profession/filter")
     public String professionFilter(@RequestParam(required = false) Employee employee,
                                    @RequestParam(required = false) Procedure service,
                                    Model model) {
@@ -68,7 +68,7 @@ public class ProfessionController {
         return "profession";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/profession/delete/{id}")
     public String professionDelete(@PathVariable(value = "id") Long id) {
         professionRepository.deleteById(id);
         return "redirect:/profession";

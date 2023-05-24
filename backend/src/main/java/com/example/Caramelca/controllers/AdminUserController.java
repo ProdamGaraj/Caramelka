@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user")
+//TODO @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminUserController {
 
@@ -19,7 +19,7 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public String user(Model model) {
         Iterable<User> users = adminUserService.usersGetAll();
         Iterable<User> Allusers = adminUserService.usersGetAll();
@@ -30,7 +30,7 @@ public class AdminUserController {
         return "user";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public String userOne(@PathVariable(value = "id") Long id,
                           Model model) {
         User user = adminUserService.userById(id);
@@ -40,19 +40,19 @@ public class AdminUserController {
         return "user-desc";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/user/filter")
     public String userFilter(@RequestParam(required = false) User user,
                              Model model) {
-        Iterable<User> Allusers = adminUserService.usersGetAll();
-        Iterable<User> users = adminUserService.userFiltred(user);
+        Iterable<User> users = adminUserService.usersGetAll();
+        Iterable<User> filteredUsers = adminUserService.userFiltred(user);
 
-        model.addAttribute("users", users);
-        model.addAttribute("Allusers", Allusers);
+        model.addAttribute("users", filteredUsers);
+        model.addAttribute("Allusers", users);
 
         return "user";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("/user/{id}/edit")
     public String userEdit(@PathVariable(value = "id") Long id,
                            @RequestParam String description) {
 

@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+    //TODO УДАЛИТЬ НАХУЙ ЭТО ГОВНО ЁБАНОЕ БЛЕАТЬ!
+
     @GetMapping("/")
     public String home() {
-        return "greeting";
+        return "redirect:index";
     }
     @GetMapping("/index")
     public String index(@AuthenticationPrincipal User user,
