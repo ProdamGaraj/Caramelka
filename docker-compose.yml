@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  postgres_db:
+    container_name: PostgreSQL
+    image: "postgres:latest"
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123456"
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+
+  seq:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "50505:8080" #left - outer port, right - inner port
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_API_CANONICALURI: "http://localhost:50505"
+
+  backend:
+    depends_on:
+      - postgres_db
+      - seq
+    container_name: backend
+    image: backend:latest
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - default   
