@@ -37,7 +37,7 @@ public class ProcedureController {
         model.addAttribute("minDate", dates.getFirst());
         model.addAttribute("maxDate", dates.getSecond());
 
-        return "service";
+        return "procedure";
     }
 
     @GetMapping("/{id}/filter")
@@ -56,7 +56,7 @@ public class ProcedureController {
         model.addAttribute("minDate", dates.getFirst());
         model.addAttribute("maxDate", dates.getSecond());
 
-        return "service";
+        return "procedure";
     }
 
     @PostMapping("/{id}/appointment")
