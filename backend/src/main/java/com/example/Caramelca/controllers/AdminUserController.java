@@ -6,12 +6,10 @@ import com.example.Caramelca.services.AdminUserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminUserController {
 
@@ -21,7 +19,7 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/")
     public String user(Model model) {
         Iterable<User> users = adminUserService.usersGetAll();
         Iterable<User> Allusers = adminUserService.usersGetAll();
@@ -32,7 +30,7 @@ public class AdminUserController {
         return "user";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public String userOne(@PathVariable(value = "id") Long id,
                           Model model) {
         User user = adminUserService.userById(id);
@@ -42,7 +40,7 @@ public class AdminUserController {
         return "user-desc";
     }
 
-    @GetMapping("/user/filter")
+    @GetMapping("/filter")
     public String userFilter(@RequestParam(required = false) User user,
                              Model model) {
         Iterable<User> Allusers = adminUserService.usersGetAll();
@@ -54,7 +52,7 @@ public class AdminUserController {
         return "user";
     }
 
-    @PostMapping("/user/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String userEdit(@PathVariable(value = "id") Long id,
                            @RequestParam String description) {
 

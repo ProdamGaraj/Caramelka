@@ -7,16 +7,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/procedure")
 public class ProcedureController {
 
     private final ProcedureService procedureService;
@@ -26,7 +24,7 @@ public class ProcedureController {
         this.procedureService = procedureService;
     }
 
-    @GetMapping("/service/{id}")
+    @GetMapping("/{id}")
     public String service(@PathVariable(value = "id") Procedure service,
                           Model model) {
         Set<Employee> employees = procedureService.employeeByService(service);
@@ -42,7 +40,7 @@ public class ProcedureController {
         return "service";
     }
 
-    @GetMapping("/service/{id}/filter")
+    @GetMapping("/{id}/filter")
     public String serviceFilter(@PathVariable(value = "id") Procedure service,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                 @RequestParam(required = false) Employee employer,
@@ -61,7 +59,7 @@ public class ProcedureController {
         return "service";
     }
 
-    @PostMapping("/service/{id}/appointment")
+    @PostMapping("/{id}/appointment")
     public String appointment(@PathVariable(value = "id") Procedure service,
                               @RequestParam String date,
                               @RequestParam String time,
