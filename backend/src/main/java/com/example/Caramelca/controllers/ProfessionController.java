@@ -62,7 +62,7 @@ public class ProfessionController {
         if(service != null) {
             professions = professionRepository.findByService(service);
         }
-        model.addAttribute("employeeServices", professions);//TODO: ебануть то же на фронте но т.к. реакт похуй
+        model.addAttribute("employeeServices", professions); //TODO: ебануть то же на фронте но т.к. реакт похуй
         model.addAttribute("employees", employees);
         model.addAttribute("services", services);
         return "profession";
