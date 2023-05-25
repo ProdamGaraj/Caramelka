@@ -46,7 +46,7 @@ public class AdminAppointmentService {
     }
 
     public Iterable<Appointment> appointmentsFindByService(Procedure service) {
-        Iterable<Appointment> appointments = appointmetnRepository.findByService(service);
+        Iterable<Appointment> appointments = appointmetnRepository.findByProcedure(service);
         return appointments;
     }
 

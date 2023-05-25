@@ -14,5 +14,5 @@ public interface AppointmetnRepository extends CrudRepository<Appointment, Long>
 
     Iterable<Appointment> findByEmployee(Employee employee);
 
-    Iterable<Appointment> findByService(Procedure service);
+    Iterable<Appointment> findByProcedure(Procedure procedure);
 }

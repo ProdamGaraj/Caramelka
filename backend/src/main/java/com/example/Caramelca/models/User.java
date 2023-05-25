@@ -30,7 +30,7 @@ public class User implements UserDetails{
     private String description;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Collection<User> users = new LinkedHashSet<>();
+    private Collection<Appointment> appointments = new LinkedHashSet<>();
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
