@@ -22,10 +22,10 @@ public class AdminUserController {
     @GetMapping("/user")
     public String user(Model model) {
         Iterable<User> users = adminUserService.usersGetAll();
-        Iterable<User> Allusers = adminUserService.usersGetAll();
+        Iterable<User> allUsers = adminUserService.usersGetAll();
 
         model.addAttribute("users", users);
-        model.addAttribute("Allusers", Allusers);
+        model.addAttribute("Allusers", allUsers);
 
         return "user";
     }

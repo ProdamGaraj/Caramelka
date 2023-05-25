@@ -25,9 +25,9 @@ public class ProcedureController {
     }
 
     @GetMapping("/procedure/{id}")
-    public String service(@PathVariable(value = "id") Procedure service,
-                          Model model) {
-        Set<Employee> employees = procedureService.employeeByService(service);
+    public String procedure(@PathVariable(value = "id") Procedure procedure,
+                            Model model) {
+        Set<Employee> employees = procedureService.employeeByService(procedure);
         Iterable<Calendar> calendars = procedureService.calendarsByEmployees(employees);
         Pair<LocalDate, LocalDate> dates = procedureService.getMinMaxDates();
 
@@ -41,12 +41,12 @@ public class ProcedureController {
     }
 
     @GetMapping("/procedure/{id}/filter")
-    public String serviceFilter(@PathVariable(value = "id") Procedure service,
+    public String proceduresFilter(@PathVariable(value = "id") Procedure procedure,
                                 @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate date,
                                 @RequestParam(required = false) Employee employer,
                                 Model model) {
 
-        Set<Employee> employees = procedureService.employeeByService(service);
+        Set<Employee> employees = procedureService.employeeByService(procedure);
         Iterable<Calendar> calendars = procedureService.filteredCalendarsByDateAndEmployees(date, employer, employees);
         Pair<LocalDate, LocalDate> dates = procedureService.getMinMaxDates();
 
@@ -60,14 +60,14 @@ public class ProcedureController {
     }
 
     @PostMapping("/procedure/{id}/appointment")
-    public String appointment(@PathVariable(value = "id") Procedure service,
+    public String appointment(@PathVariable(value = "id") Procedure procedure,
                               @RequestParam String date,
                               @RequestParam String time,
                               @RequestParam Employee employer,
                               @AuthenticationPrincipal User user) {
 
         Appointment appointment = procedureService.saveAppointment(
-                employer, service, user,
+                employer, procedure, user,
                 LocalDate.parse(date),
                 LocalTime.parse(time));
 

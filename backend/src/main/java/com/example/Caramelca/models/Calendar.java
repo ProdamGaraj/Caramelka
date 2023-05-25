@@ -30,9 +30,7 @@ public class Calendar implements Serializable {
         this.time = time;
     }
 
-    public Calendar() {
-
-    }
+    public Calendar() {}
 
     public Long getId() {
         return id;

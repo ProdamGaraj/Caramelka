@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,7 +16,7 @@ public class Employee {
     private Set<Calendar> calendar = new LinkedHashSet<Calendar>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Set<Appointment> appointment = new LinkedHashSet<Appointment>();
+    private Collection<Appointment> appointment = new LinkedHashSet<Appointment>();
 
     @ManyToMany(mappedBy = "employees")
     private Collection<Procedure> procedures;
@@ -32,15 +31,37 @@ public class Employee {
 
     private boolean deleted;
 
-    public Employee() {
-
-    }
+    public Employee() {}
 
     public Employee(String name, String surname, String patronymic, String number) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
         this.number = number;
+    }
+
+    public void setAppointment(Collection<Appointment> appointment) {
+        this.appointment = appointment;
+    }
+
+    public void setCalendar(Set<Calendar> calendar) {
+        this.calendar = calendar;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public Collection<Appointment> getAppointment() {
+        return appointment;
+    }
+
+    public Set<Calendar> getCalendar() {
+        return calendar;
     }
 
     public void setProcedures(Collection<Procedure> procedures) {

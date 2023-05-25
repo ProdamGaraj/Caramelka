@@ -16,8 +16,8 @@ public class Appointment {
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "service_id")
-    private Procedure service;
+    @JoinColumn(name = "procedure_id")
+    private Procedure procedure;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -29,18 +29,16 @@ public class Appointment {
     @Column(columnDefinition = "TIME WITHOUT TIME ZONE")
     private LocalTime time;
 
-    public Appointment(Employee employee, Procedure service, User user, LocalDate date, LocalTime time) {
+    public Appointment(Employee employee, Procedure procedure, User user, LocalDate date, LocalTime time) {
         this.employee = employee;
-        this.service = service;
+        this.procedure = procedure;
         this.user = user;
         this.date = date;
         this.time = time;
     }
 
 
-    public Appointment() {
-
-    }
+    public Appointment() {}
 
     public Long getId() {
         return id;
@@ -58,12 +56,12 @@ public class Appointment {
         this.employee = employee;
     }
 
-    public Procedure getService() {
-        return service;
+    public Procedure getProcedure() {
+        return procedure;
     }
 
-    public void setService(Procedure service) {
-        this.service = service;
+    public void setProcedure(Procedure procedure) {
+        this.procedure = procedure;
     }
 
     public User getUser() {

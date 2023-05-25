@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -27,6 +28,9 @@ public class User implements UserDetails{
     private String number;
 
     private String description;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private Collection<User> users = new LinkedHashSet<>();
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))

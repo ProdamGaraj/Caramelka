@@ -3,6 +3,7 @@ package com.example.Caramelca.models;
 import jakarta.persistence.*;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 
 @Entity
 public class Procedure {
@@ -24,6 +25,9 @@ public class Procedure {
     @ManyToMany
     private Collection<Employee> employees;
 
+    @OneToMany(mappedBy = "procedure", cascade = CascadeType.REMOVE)
+    private Collection<Appointment> appointments = new LinkedHashSet<>();
+
     public Procedure(String title, String description, String logo, int cost, int duration) {
         this.title = title;
         this.description = description;
@@ -34,6 +38,14 @@ public class Procedure {
 
     public Procedure() {
 
+    }
+
+    public Collection<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Collection<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     public Collection<Employee> getEmployees() {
