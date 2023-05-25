@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
 
-  postgres_db:
-    container_name: PostgreSQL
+  db:
+    container_name: db
     image: "postgres:latest"
     environment:
       TZ: "Europe/Moscow"
@@ -12,8 +12,6 @@ services:
     restart: unless-stopped
     ports:
       - "5432:5432"
-    networks:
-      - default
 
   seq:
     image: datalust/seq
@@ -26,14 +24,16 @@ services:
 
   backend:
     depends_on:
-      - postgres_db
+      - db
       - seq
     container_name: backend
     image: backend:latest
     build:
       context: ./backend
       dockerfile: ./Dockerfile
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/
+      - DB_USER=postgres
+      - DB_PWD=123456
     ports:
-      - "8080:8080"
-    networks:
-      - default   
+      - "8888:8080"
