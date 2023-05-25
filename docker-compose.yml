@@ -32,8 +32,11 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
     environment:
-      - DB_URL=jdbc:postgresql://db:5432/
-      - DB_USER=postgres
-      - DB_PWD=123456
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123456
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_LOB_NON_CONTEXTUAL_CREATION=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
     ports:
       - "8888:8080"
