@@ -24,28 +24,17 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private String name;
-
-    private String surname;
-
-    private String patronymic;
-
     private String number;
 
-    private String description;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String password, String name, String surname, String patronymic, String number, String description,
+    public UserDetailsImpl(Long id, String username, String password, String number,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
         this.number = number;
-        this.description = description;
 
         this.authorities = authorities;
     }
@@ -54,7 +43,7 @@ public class UserDetailsImpl implements UserDetails {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
-        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getPatronymic(), user.getNumber(), user.getDescription(), authorities);
+        return new UserDetailsImpl(user.getId(), user.getUsername(), user.getPassword(), user.getNumber(), authorities);
     }
 
     @Override
@@ -76,24 +65,8 @@ public class UserDetailsImpl implements UserDetails {
         return username;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
     public String getNumber() {
         return number;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.Caramelca.services;
+/*package com.example.Caramelca.services;
 
 import com.example.Caramelca.models.Role;
 import com.example.Caramelca.models.User;
@@ -17,7 +17,7 @@ public class RegistrationService {
     }
 
     public boolean checkUserByUsernameInDB(String username) {
-        return userRepository.findByUsername(username) != null;
+        return userRepository.findByUsername(username).isPresent();
     }
 
     public void addRoleAndSaveUser(User user) {
@@ -25,4 +25,4 @@ public class RegistrationService {
         userRepository.save(user);
     }
 
-}
+} */

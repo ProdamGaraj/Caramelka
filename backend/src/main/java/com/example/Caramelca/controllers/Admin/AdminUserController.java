@@ -1,4 +1,4 @@
-package com.example.Caramelca.controllers.Admin;
+/* package com.example.Caramelca.controllers.Admin;
 
 import com.example.Caramelca.models.User;
 import com.example.Caramelca.services.Admin.AdminUserService;
@@ -59,4 +59,4 @@ public class AdminUserController {
 
         return "redirect:/user";
     }
-}
+} */

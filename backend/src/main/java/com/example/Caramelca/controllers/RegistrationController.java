@@ -1,4 +1,4 @@
-package com.example.Caramelca.controllers;
+/* package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.User;
 import com.example.Caramelca.services.RegistrationService;
@@ -34,4 +34,4 @@ public class RegistrationController {
         registrationService.addRoleAndSaveUser(user);
         return "redirect:/login";
     }
-}
+} */

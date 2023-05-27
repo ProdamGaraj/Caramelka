@@ -1,4 +1,4 @@
-package com.example.Caramelca.controllers;
+/*package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.Role;
 import com.example.Caramelca.models.User;
@@ -24,4 +24,4 @@ public class MainController {
         }
         return "index";
     }
-}
+} */
