@@ -2,15 +2,11 @@ package com.example.Caramelca.services;
 
 import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.repositories.EmployeeRepository;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Getter
-@Setter
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
