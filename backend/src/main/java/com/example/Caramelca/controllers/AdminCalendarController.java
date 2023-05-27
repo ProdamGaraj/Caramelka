@@ -3,6 +3,7 @@ package com.example.Caramelca.controllers;
 import com.example.Caramelca.models.Calendar;
 import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.services.AdminCalendarService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,14 +18,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Controller
+@RequiredArgsConstructor
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminCalendarController {
 
     private final AdminCalendarService adminCalendarService;
-
-    public AdminCalendarController(AdminCalendarService adminCalendarService) {
-        this.adminCalendarService = adminCalendarService;
-    }
 
     @GetMapping("/calendar")
     public String adminCalendar(Model model) {

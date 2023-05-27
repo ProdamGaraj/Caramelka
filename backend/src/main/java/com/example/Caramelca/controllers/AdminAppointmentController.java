@@ -4,6 +4,7 @@ import com.example.Caramelca.models.Appointment;
 import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.models.Service;
 import com.example.Caramelca.services.AdminAppointmentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,14 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 
 @Controller
+@RequiredArgsConstructor
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminAppointmentController {
 
     private final AdminAppointmentService adminAppointmentService;
-
-    public AdminAppointmentController(AdminAppointmentService adminAppointmentService) {
-        this.adminAppointmentService = adminAppointmentService;
-    }
 
     @GetMapping("/appointment")
     public String appointment(Model model) {

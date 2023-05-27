@@ -2,6 +2,7 @@ package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.*;
 import com.example.Caramelca.services.ServiceService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,14 +18,11 @@ import java.time.LocalTime;
 import java.util.Set;
 
 @Controller
+@RequiredArgsConstructor
 public class ServiceController {
 
     private final ServiceService serviceService;
 
-
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
-    }
 
     @GetMapping("/service/{id}")
     public String service(@PathVariable(value = "id") Service service,
