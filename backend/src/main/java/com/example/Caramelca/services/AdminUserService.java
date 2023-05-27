@@ -3,15 +3,13 @@ package com.example.Caramelca.services;
 import com.example.Caramelca.models.Role;
 import com.example.Caramelca.models.User;
 import com.example.Caramelca.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AdminUserService {
     private final UserRepository userRepository;
-
-    public AdminUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public Iterable<User> usersGetAll() {
         Iterable<User> users = userRepository.findByRoles(Role.USER);

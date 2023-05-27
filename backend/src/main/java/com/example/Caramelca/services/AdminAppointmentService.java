@@ -5,11 +5,13 @@ import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.EmployeeRepository;
 import com.example.Caramelca.repositories.ServiceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
 @Service
+@RequiredArgsConstructor
 public class AdminAppointmentService {
 
     private final EmployeeRepository employeeRepository;
@@ -17,12 +19,6 @@ public class AdminAppointmentService {
     private final ServiceRepository serviceRepository;
 
     private final AppointmetnRepository appointmetnRepository;
-
-    public AdminAppointmentService(EmployeeRepository employeeRepository, ServiceRepository serviceRepository, AppointmetnRepository appointmetnRepository) {
-        this.employeeRepository = employeeRepository;
-        this.serviceRepository = serviceRepository;
-        this.appointmetnRepository = appointmetnRepository;
-    }
 
     public Iterable<Employee> employeesGetAll() {
         Iterable<Employee> employees = employeeRepository.findAll();

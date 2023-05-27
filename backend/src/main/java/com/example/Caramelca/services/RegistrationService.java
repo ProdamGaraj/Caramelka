@@ -3,18 +3,16 @@ package com.example.Caramelca.services;
 import com.example.Caramelca.models.Role;
 import com.example.Caramelca.models.User;
 import com.example.Caramelca.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor
 public class RegistrationService {
 
     private final UserRepository userRepository;
-
-    public RegistrationService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public boolean checkUserByUsernameInDB(String username) {
         return userRepository.findByUsername(username) != null;
