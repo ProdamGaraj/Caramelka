@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
+    //TODO Пофиксить редирект( "/" редиректит на индекс, так не должно быть) ps - подробности у Димы
+
     @GetMapping("/")
     public String home() {
-        return "greeting";
+        return "redirect:index";
     }
     @GetMapping("/index")
     public String index(@AuthenticationPrincipal User user,

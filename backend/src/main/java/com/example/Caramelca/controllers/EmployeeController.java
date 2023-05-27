@@ -2,25 +2,21 @@ package com.example.Caramelca.controllers;
 
 import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.services.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
+//TODO @RequestMapping("/employees")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class EmployeeController {
 
 
     private final EmployeeService employeeService;
 
-
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
 
     @GetMapping("/employees")
     public String employeeMain(Model model) {

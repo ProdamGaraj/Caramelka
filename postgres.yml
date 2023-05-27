@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+
+  db:
+    container_name: db
+    image: "postgres:latest"
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: "caramelca"
+    restart: unless-stopped
+    ports:
+      - "5432:5432"

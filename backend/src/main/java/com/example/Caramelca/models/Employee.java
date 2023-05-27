@@ -1,11 +1,17 @@
 package com.example.Caramelca.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class Employee {
 
     @Id
@@ -13,7 +19,7 @@ public class Employee {
     private Long id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Set<Employee_Service> employee_Service = new LinkedHashSet<Employee_Service>();
+    private Set<Profession> profession = new LinkedHashSet<Profession>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
     private Set<Calendar> calendar = new LinkedHashSet<Calendar>();
@@ -31,10 +37,6 @@ public class Employee {
 
     private boolean deleted;
 
-    public Employee() {
-
-    }
-
     public Employee(String name, String surname, String patronymic, String number) {
         this.name = name;
         this.surname = surname;
@@ -42,43 +44,4 @@ public class Employee {
         this.number = number;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }
