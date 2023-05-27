@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    //TODO УДАЛИТЬ НАХУЙ ЭТО ГОВНО ЁБАНОЕ БЛЕАТЬ!
+    //TODO Пофиксить редирект( "/" редиректит на индекс, так не должно быть) ps - подробности у Димы
 
     @GetMapping("/")
     public String home() {

@@ -2,12 +2,18 @@ package com.example.Caramelca.models;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class Calendar implements Serializable {
 
     @Id
@@ -27,42 +33,6 @@ public class Calendar implements Serializable {
     public Calendar(Employee employee, LocalDate date, LocalTime time) {
         this.employee = employee;
         this.date = date;
-        this.time = time;
-    }
-
-    public Calendar() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
         this.time = time;
     }
 }

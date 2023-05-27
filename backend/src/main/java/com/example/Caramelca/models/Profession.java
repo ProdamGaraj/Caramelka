@@ -1,8 +1,14 @@
 package com.example.Caramelca.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class Profession {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,40 +29,4 @@ public class Profession {
         this.service = service;
     }
 
-
-    public Profession() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Procedure getService() {
-        return service;
-    }
-
-    public void setService(Procedure service) {
-        this.service = service;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
 }
