@@ -7,33 +7,24 @@ services:
     image: "postgres:latest"
     environment:
       TZ: "Europe/Moscow"
-      POSTGRES_USER: "postgres"
+      POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: "caramelca"
     restart: unless-stopped
     ports:
       - "5432:5432"
 
-  seq:
-    image: datalust/seq
-    restart: unless-stopped
-    ports:
-      - "50505:8080" #left - outer port, right - inner port
-    environment:
-      ACCEPT_EULA: "Y"
-      SEQ_API_CANONICALURI: "http://localhost:50505"
-
   backend:
     depends_on:
       - db
-      - seq
     container_name: backend
     image: backend:latest
     build:
       context: ./backend
       dockerfile: ./Dockerfile
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/
-      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/caramelca
+      - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=123456
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
       - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_LOB_NON_CONTEXTUAL_CREATION=true
