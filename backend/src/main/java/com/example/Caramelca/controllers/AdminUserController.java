@@ -1,6 +1,6 @@
 package com.example.Caramelca.controllers;
 
-import com.example.Caramelca.models.Client.User;
+import com.example.Caramelca.models.Auth.User;
 import com.example.Caramelca.services.AdminUserService;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

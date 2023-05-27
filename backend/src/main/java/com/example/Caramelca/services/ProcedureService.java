@@ -1,5 +1,6 @@
 package com.example.Caramelca.services;
 
+import com.example.Caramelca.models.Auth.User;
 import com.example.Caramelca.models.Client.*;
 import com.example.Caramelca.repositories.AppointmentRepository;
 import com.example.Caramelca.repositories.EmployeeRepository;
@@ -8,9 +9,6 @@ import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @org.springframework.stereotype.Service
 public class ProcedureService {

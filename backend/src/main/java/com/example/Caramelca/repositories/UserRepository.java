@@ -1,7 +1,7 @@
 package com.example.Caramelca.repositories;
 
 import com.example.Caramelca.models.Admin.Role;
-import com.example.Caramelca.models.Client.User;
+import com.example.Caramelca.models.Auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

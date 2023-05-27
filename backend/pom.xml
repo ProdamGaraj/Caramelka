@@ -55,6 +55,11 @@
 			<version>3.0.4</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!--Security-->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->

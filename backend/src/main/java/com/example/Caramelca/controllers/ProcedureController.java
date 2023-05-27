@@ -1,6 +1,6 @@
 package com.example.Caramelca.controllers;
 
-import com.example.Caramelca.models.Client.User;
+import com.example.Caramelca.models.Auth.User;
 import com.example.Caramelca.models.Client.Appointment;
 import com.example.Caramelca.models.Client.Employee;
 import com.example.Caramelca.models.Client.Procedure;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Set;
 
 @Controller
 //TODO @RequestMapping("/procedure")

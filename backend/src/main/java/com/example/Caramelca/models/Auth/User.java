@@ -1,7 +1,11 @@
-package com.example.Caramelca.models.Client;
+package com.example.Caramelca.models.Auth;
 
 import com.example.Caramelca.models.Admin.Role;
+import com.example.Caramelca.models.Client.Appointment;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +14,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@RequiredArgsConstructor
+@Getter
+@Setter
 @Table(name = "users")
 //public class User implements UserDetails {
 public class User {
@@ -30,34 +37,6 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Collection<Appointment> getAppointments() {
-        return appointments;
-    }
-    public void setAppointments(Collection<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
 //    @Override
 //    public boolean isAccountNonExpired() {
@@ -80,39 +59,4 @@ public class User {
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
 //        return null;
 //    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String number) {
-        this.phone = number;
-    }
 }
