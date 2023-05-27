@@ -66,10 +66,12 @@ public class UserDetailsImpl implements UserDetails {
         return  id;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -114,6 +116,7 @@ public class UserDetailsImpl implements UserDetails {
         return true;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
