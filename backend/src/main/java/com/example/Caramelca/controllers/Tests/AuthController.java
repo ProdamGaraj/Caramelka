@@ -47,10 +47,8 @@ public class AuthController {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     PasswordEncoder encoder;
-
     @Autowired
     JwtUtils jwtUtils;
 
@@ -78,7 +76,7 @@ public class AuthController {
         }
 
         if (userRepository.existsByNumber(signUpRequest.getNumber())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Number is already in use!"));
         }
 
         // Create new user's account

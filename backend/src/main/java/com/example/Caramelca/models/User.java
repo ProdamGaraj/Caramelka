@@ -29,10 +29,10 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String username, String password, String number) {
+    public User(String username, String number, String password) {
         this.username = username;
-        this.password = password;
         this.number = number;
+        this.password = password;
     }
 
     public User() {
