@@ -2,21 +2,19 @@ package com.example.Caramelca.controllers.Admin;
 
 import com.example.Caramelca.models.User;
 import com.example.Caramelca.services.Admin.AdminUserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
 //TODO @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminUserController {
 
     private final AdminUserService adminUserService;
-
-    public AdminUserController(AdminUserService adminUserService) {
-        this.adminUserService = adminUserService;
-    }
 
     @GetMapping("/user")
     public String user(Model model) {

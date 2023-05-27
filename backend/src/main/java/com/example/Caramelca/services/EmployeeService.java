@@ -2,17 +2,13 @@ package com.example.Caramelca.services;
 
 import com.example.Caramelca.models.Employee;
 import com.example.Caramelca.repositories.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
     public Iterable<Employee> findAllEmployee() {
         Iterable<Employee> employees = employeeRepository.findAll();

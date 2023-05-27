@@ -4,6 +4,9 @@ import com.example.Caramelca.models.*;
 import com.example.Caramelca.repositories.AppointmetnRepository;
 import com.example.Caramelca.repositories.CalendarRepository;
 import com.example.Caramelca.repositories.ProfessionRepository;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
@@ -12,18 +15,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @org.springframework.stereotype.Service
+@RequiredArgsConstructor
 public class ProcedureService {
     private final CalendarRepository calendarRepository;
 
     private final ProfessionRepository employeeServiceRepository;
 
     private final AppointmetnRepository appointmetnRepository;
-
-    public ProcedureService(CalendarRepository calendarRepository, ProfessionRepository employeeServiceRepository, AppointmetnRepository appointmetnRepository) {
-        this.calendarRepository = calendarRepository;
-        this.employeeServiceRepository = employeeServiceRepository;
-        this.appointmetnRepository = appointmetnRepository;
-    }
 
     public Set<Employee> employeeByService(Procedure service) {
         Iterable<Profession> employee = employeeServiceRepository.findByService(service);

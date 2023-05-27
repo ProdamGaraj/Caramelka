@@ -6,12 +6,14 @@ import com.example.Caramelca.models.Procedure;
 import com.example.Caramelca.repositories.EmployeeRepository;
 import com.example.Caramelca.repositories.ProfessionRepository;
 import com.example.Caramelca.repositories.ServiceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
 //TODO @RequestMapping("/profession")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class ProfessionController {
@@ -21,12 +23,6 @@ public class ProfessionController {
     private final EmployeeRepository employeeRepository;
 
     private final ServiceRepository serviceRepository;
-
-    public ProfessionController(ProfessionRepository professionRepository, EmployeeRepository employeeRepository, ServiceRepository serviceRepository) {
-        this.professionRepository = professionRepository;
-        this.employeeRepository = employeeRepository;
-        this.serviceRepository = serviceRepository;
-    }
 
     @GetMapping("/profession")
     public String profession(Model model) {
