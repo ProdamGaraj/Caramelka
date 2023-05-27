@@ -1,8 +1,7 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Calendar;
-import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.repositories.CalendarRepository;
+import com.example.Caramelca.models.Client.Employee;
+import com.example.Caramelca.repositories.QualificationRepository;
 import com.example.Caramelca.repositories.EmployeeRepository;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -14,11 +13,11 @@ public class AdminCalendarService {
     private final EmployeeRepository employeeRepository;
 
 
-    private final CalendarRepository calendarRepository;
+    private final QualificationRepository qualificationRepository;
 
-    public AdminCalendarService(EmployeeRepository employeeRepository, CalendarRepository calendarRepository) {
+    public AdminCalendarService(EmployeeRepository employeeRepository, QualificationRepository qualificationRepository) {
         this.employeeRepository = employeeRepository;
-        this.calendarRepository = calendarRepository;
+        this.qualificationRepository = qualificationRepository;
     }
 
     public Iterable<Employee> employeesGetAll() {
@@ -26,29 +25,8 @@ public class AdminCalendarService {
         return employees;
     }
 
-    public Iterable<Calendar> calendarGetAll() {
-        Iterable<Calendar> calendars = calendarRepository.findAll();
-        return calendars;
-    }
-
-    public Iterable<Calendar> calendarFiltred(LocalDate date, Employee employee) {
-        Iterable<Calendar> calendar = calendarRepository.findAll();
-        if(date != null) {
-            calendar = calendarRepository.findByDate(date);
-        }
-        if(employee != null) {
-            calendar = calendarRepository.findByEmployee(employee);
-        }
-
-        return calendar;
-    }
-
     public void calendarDelete(Long id) {
-        calendarRepository.deleteById(id);
-    }
-
-    public void calendarSave(Calendar calendar) {
-        calendarRepository.save(calendar);
+        qualificationRepository.deleteById(id);
     }
 
     public Pair<LocalDate, LocalDate> getMinMaxDates() {

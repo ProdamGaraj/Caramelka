@@ -1,11 +1,11 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Appointment;
-import com.example.Caramelca.models.Employee;
-import com.example.Caramelca.models.Procedure;
-import com.example.Caramelca.repositories.AppointmetnRepository;
+import com.example.Caramelca.models.Client.Appointment;
+import com.example.Caramelca.models.Client.Employee;
+import com.example.Caramelca.models.Client.Procedure;
+import com.example.Caramelca.repositories.AppointmentRepository;
 import com.example.Caramelca.repositories.EmployeeRepository;
-import com.example.Caramelca.repositories.ServiceRepository;
+import com.example.Caramelca.repositories.ProcedureRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,14 +15,14 @@ public class AdminAppointmentService {
 
     private final EmployeeRepository employeeRepository;
 
-    private final ServiceRepository serviceRepository;
+    private final ProcedureRepository procedureRepository;
 
-    private final AppointmetnRepository appointmetnRepository;
+    private final AppointmentRepository appointmentRepository;
 
-    public AdminAppointmentService(EmployeeRepository employeeRepository, ServiceRepository serviceRepository, AppointmetnRepository appointmetnRepository) {
+    public AdminAppointmentService(EmployeeRepository employeeRepository, ProcedureRepository procedureRepository, AppointmentRepository appointmentRepository) {
         this.employeeRepository = employeeRepository;
-        this.serviceRepository = serviceRepository;
-        this.appointmetnRepository = appointmetnRepository;
+        this.procedureRepository = procedureRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     public Iterable<Employee> employeesGetAll() {
@@ -31,27 +31,17 @@ public class AdminAppointmentService {
     }
 
     public Iterable<Procedure> servicesGetAll () {
-        Iterable<Procedure> services = serviceRepository.findAll();
+        Iterable<Procedure> services = procedureRepository.findAll();
         return  services;
     }
 
     public Iterable<Appointment> appointmentsGetAll() {
-        Iterable<Appointment> appointments = appointmetnRepository.findAll();
+        Iterable<Appointment> appointments = appointmentRepository.findAll();
         return appointments;
     }
 
     public Iterable<Appointment> appointmentsFindByDate(LocalDate date) {
-        Iterable<Appointment> appointments = appointmetnRepository.findByDate(date);
-        return appointments;
-    }
-
-    public Iterable<Appointment> appointmentsFindByService(Procedure service) {
-        Iterable<Appointment> appointments = appointmetnRepository.findByProcedure(service);
-        return appointments;
-    }
-
-    public Iterable<Appointment> appointmentsFindByEmployee(Employee employee) {
-        Iterable<Appointment> appointments = appointmetnRepository.findByEmployee(employee);
+        Iterable<Appointment> appointments = appointmentRepository.findByDate(date);
         return appointments;
     }
 
@@ -62,12 +52,6 @@ public class AdminAppointmentService {
 
         if(date != null) {
             appointments = appointmentsFindByDate(date);
-        }
-        if(service != null) {
-            appointments = appointmentsFindByService(service);
-        }
-        if(employer != null) {
-            appointments = appointmentsFindByEmployee(employer);
         }
         return appointments;
     }

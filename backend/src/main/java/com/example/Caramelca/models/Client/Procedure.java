@@ -1,4 +1,4 @@
-package com.example.Caramelca.models;
+package com.example.Caramelca.models.Client;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 
 @Entity
 public class Procedure {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,44 +15,28 @@ public class Procedure {
 
     private String description;
 
-    private String logo;
-
     private int cost;
 
     private int duration;
 
-    @ManyToMany
-    private Collection<Employee> employees;
-
     @OneToMany(mappedBy = "procedure", cascade = CascadeType.REMOVE)
-    private Collection<Appointment> appointments = new LinkedHashSet<>();
+    private Collection<Qualification> qualification = new LinkedHashSet<>();
 
-    public Procedure(String title, String description, String logo, int cost, int duration) {
+    public Procedure(String title, String description, int cost, int duration) {
         this.title = title;
         this.description = description;
-        this.logo = logo;
         this.cost = cost;
         this.duration = duration;
     }
 
-    public Procedure() {
+    public Procedure() {}
 
+    public Collection<Qualification> getQualification() {
+        return qualification;
     }
 
-    public Collection<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(Collection<Appointment> appointments) {
-        this.appointments = appointments;
-    }
-
-    public Collection<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Collection<Employee> employees) {
-        this.employees = employees;
+    public void setQualification(Collection<Qualification> appointments) {
+        this.qualification = appointments;
     }
 
     public Long getId() {
@@ -78,14 +61,6 @@ public class Procedure {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public int getCost() {

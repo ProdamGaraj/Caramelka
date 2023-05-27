@@ -1,32 +1,31 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.*;
-import com.example.Caramelca.repositories.AppointmetnRepository;
-import com.example.Caramelca.repositories.CalendarRepository;
+import com.example.Caramelca.models.Client.*;
+import com.example.Caramelca.repositories.AppointmentRepository;
+import com.example.Caramelca.repositories.EmployeeRepository;
+import com.example.Caramelca.repositories.QualificationRepository;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @org.springframework.stereotype.Service
 public class ProcedureService {
-    private final CalendarRepository calendarRepository;
+    private final QualificationRepository qualificationRepository;
 
-    private final AppointmetnRepository appointmetnRepository;
+    private final AppointmentRepository appointmentRepository;
 
-    public ProcedureService(CalendarRepository calendarRepository, AppointmetnRepository appointmetnRepository) {
-        this.calendarRepository = calendarRepository;
-        this.appointmetnRepository = appointmetnRepository;
-    }
+    private final EmployeeRepository employeeRepository;
 
-    public Set<Employee> employeeByService(Procedure service) {
-        return new HashSet<>(service.getEmployees());
-    }
-
-    public Iterable<Calendar> calendarsByEmployees(Set<Employee> employees) {
-        return calendarRepository.findByEmployeeIn(employees);
+    public ProcedureService(QualificationRepository qualificationRepository,
+                            AppointmentRepository appointmentRepository,
+                            EmployeeRepository employeeRepository) {
+        this.qualificationRepository = qualificationRepository;
+        this.appointmentRepository = appointmentRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     public Pair<LocalDate, LocalDate> getMinMaxDates() {
@@ -35,34 +34,13 @@ public class ProcedureService {
         return Pair.of(minDate, maxDate);
     }
 
-    public Iterable<Calendar> filteredCalendarsByDateAndEmployees(LocalDate date,
-                                                                  Employee employee,
-                                                                  Set<Employee> employees) {
-        if (employee != null && employees.contains(employee)) {
-            return calendarRepository.findByEmployeeIn(Set.of(employee));
-        }
-        if (date != null) {
-            return calendarRepository.findByDateAndEmployeeIn(date, employees);
-        }
-        return calendarRepository.findByEmployeeIn(employees);
-    }
-
     public Appointment saveAppointment(Employee employee,
-                                Procedure service,
-                                User user,
-                                LocalDate date,
-                                LocalTime time) {
-        Appointment appointment = new Appointment(employee, service, user, date, time);
-        appointmetnRepository.save(appointment);
+                                       Procedure procedure,
+                                       User user,
+                                       LocalDate date,
+                                       LocalTime time) {
+        Appointment appointment = new Appointment(new Qualification(employee, procedure), user, date, time);
+        appointmentRepository.save(appointment);
         return appointment;
-    }
-
-    public void deleteCalendarByDateAndEmployee(Employee employee,
-                                                LocalDate date,
-                                                LocalTime time) {
-        Iterable<Calendar> calendars = calendarRepository.findByDateAndEmployeeAndTime(date, employee, time);
-        for (Calendar calendar : calendars) {
-            calendarRepository.delete(calendar);
-        }
     }
 }

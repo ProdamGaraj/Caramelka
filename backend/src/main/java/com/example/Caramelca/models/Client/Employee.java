@@ -1,10 +1,9 @@
-package com.example.Caramelca.models;
+package com.example.Caramelca.models.Client;
 
 import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 public class Employee {
@@ -13,13 +12,7 @@ public class Employee {
     private Long id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Set<Calendar> calendar = new LinkedHashSet<Calendar>();
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-    private Collection<Appointment> appointment = new LinkedHashSet<Appointment>();
-
-    @ManyToMany(mappedBy = "employees")
-    private Collection<Procedure> procedures;
+    private Collection<Qualification> qualification = new LinkedHashSet<>();
 
     private String name;
 
@@ -40,12 +33,8 @@ public class Employee {
         this.number = number;
     }
 
-    public void setAppointment(Collection<Appointment> appointment) {
-        this.appointment = appointment;
-    }
-
-    public void setCalendar(Set<Calendar> calendar) {
-        this.calendar = calendar;
+    public void setQualification(Collection<Qualification> appointment) {
+        this.qualification = appointment;
     }
 
     public void setDeleted(boolean deleted) {
@@ -56,20 +45,8 @@ public class Employee {
         return deleted;
     }
 
-    public Collection<Appointment> getAppointment() {
-        return appointment;
-    }
-
-    public Set<Calendar> getCalendar() {
-        return calendar;
-    }
-
-    public void setProcedures(Collection<Procedure> procedures) {
-        this.procedures = procedures;
-    }
-
-    public Collection<Procedure> getProcedures() {
-        return procedures;
+    public Collection<Qualification> getQualification() {
+        return qualification;
     }
 
     public Long getId() {

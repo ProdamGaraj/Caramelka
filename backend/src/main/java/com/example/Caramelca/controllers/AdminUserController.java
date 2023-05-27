@@ -1,16 +1,15 @@
 package com.example.Caramelca.controllers;
 
-import com.example.Caramelca.models.Role;
-import com.example.Caramelca.models.User;
+import com.example.Caramelca.models.Client.User;
 import com.example.Caramelca.services.AdminUserService;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 //TODO @RequestMapping("/user")
-@PreAuthorize("hasAuthority('ADMIN')")
+//@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminUserController {
 
     private final AdminUserService adminUserService;
@@ -50,14 +49,5 @@ public class AdminUserController {
         model.addAttribute("Allusers", users);
 
         return "user";
-    }
-
-    @PostMapping("/user/{id}/edit")
-    public String userEdit(@PathVariable(value = "id") Long id,
-                           @RequestParam String description) {
-
-        adminUserService.userEdit(id, description);
-
-        return "redirect:/user";
     }
 }

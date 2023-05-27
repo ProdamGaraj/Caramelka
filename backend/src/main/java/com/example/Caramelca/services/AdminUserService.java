@@ -1,7 +1,7 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Role;
-import com.example.Caramelca.models.User;
+import com.example.Caramelca.models.Admin.Role;
+import com.example.Caramelca.models.Client.User;
 import com.example.Caramelca.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +27,9 @@ public class AdminUserService {
         Iterable<User> users = userRepository.findAll();
 
         if (user != null) {
-            users = userRepository.findByNumber(user.getNumber());
+            users = userRepository.findByPhone(user.getPhone());
         }
 
         return users;
-    }
-
-    public void userEdit(Long id, String description) {
-        User user = userRepository.findById(id).orElseThrow();
-        user.setDescription(description);
-        userRepository.save(user);
     }
 }

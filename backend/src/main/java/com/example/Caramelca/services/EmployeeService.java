@@ -1,10 +1,8 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Employee;
+import com.example.Caramelca.models.Client.Employee;
 import com.example.Caramelca.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class EmployeeService {

@@ -64,7 +64,7 @@
       <tr th:each="appointment : ${appointments}">
         <td th:text="${appointment.service.title}"></td>
         <td th:text="${appointment.service.cost}"></td>
-        <td th:text="${appointment.employee.name} + ' ' + ${appointment.employee.surname}"></td>
+        <td th:text="${appointment.qualification.name} + ' ' + ${appointment.qualification.surname}"></td>
         <td th:text="${appointment.user.name} + ' ' + ${appointment.user.surname}"></td>
         <td th:text="${appointment.date}"></td>
         <td th:text="${appointment.time}"></td>
