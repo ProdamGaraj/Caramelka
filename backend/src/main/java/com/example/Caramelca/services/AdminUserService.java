@@ -1,6 +1,6 @@
 package com.example.Caramelca.services;
 
-import com.example.Caramelca.models.Admin.Role;
+import com.example.Caramelca.models.Auth.Role;
 import com.example.Caramelca.models.Auth.User;
 import com.example.Caramelca.repositories.UserRepository;
 import org.springframework.stereotype.Service;

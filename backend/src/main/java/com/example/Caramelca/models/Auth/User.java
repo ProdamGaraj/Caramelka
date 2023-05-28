@@ -1,6 +1,5 @@
 package com.example.Caramelca.models.Auth;
 
-import com.example.Caramelca.models.Admin.Role;
 import com.example.Caramelca.models.Client.Appointment;
 import jakarta.persistence.*;
 import lombok.Getter;
